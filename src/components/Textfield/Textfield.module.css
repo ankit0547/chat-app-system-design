@@ -1,0 +1,11 @@
+.textField{
+    position: relative;
+}
+.textField .eye{
+color: red;
+position: absolute;
+right: 1rem;
+top: 2.1rem;
+cursor: pointer;
+
+}
