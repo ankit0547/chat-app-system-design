@@ -13,8 +13,6 @@ const chatReducer = createReducer(initialState, (builder) => {
       state.isConnected = true;
     })
     .addCase(actions.setChatClient, (state, action) => {
-      // eslint-disable-next-line no-debugger
-      debugger;
       state.client = action.payload;
     })
     .addCase(actions.chatDisconnected, (state) => {

@@ -27,7 +27,10 @@ const ChatHeader = ({ chats }: ChatHeaderProps) => {
           <h2 className="font-semibold text-gray-800">
             {chats.find((c) => c.id === selectedChat)?.name}
           </h2>
-          <p className="text-xs text-gray-500">Online</p>
+          <p className="text-xs text-green-500 flex items-center">
+            <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+            Online
+          </p>
         </div>
       </div>
     </>

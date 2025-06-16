@@ -7,7 +7,6 @@ const Sidebar = () => {
   const history = useLocation();
   const activeTab = history.pathname.split("/")[1];
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(logoutUser());
