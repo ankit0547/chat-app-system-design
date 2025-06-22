@@ -1,21 +1,13 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import TextField from "../Textfield/Textfield";
 import Button from "../Button/Button";
 import { registerUser } from "../../redux/actions/auth";
-import { ReduxState } from "../../types/types";
+import NavLink from "../Navlink/Navlink";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-
-  const token = useSelector((state: ReduxState) => state.app.token);
-
-  // useEffect(() => {
-  //   if (token) navigate("/");
-  // }, [token, navigate]);
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -35,10 +27,6 @@ const SignupForm = () => {
     dispatch(registerUser({ formData }));
   };
 
-  // ✅ Redirect immediately if token exists
-  if (token) {
-    return <Navigate to="/" replace />;
-  }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-md rounded-lg">

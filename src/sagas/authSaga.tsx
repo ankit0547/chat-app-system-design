@@ -4,9 +4,8 @@ import { put, takeLatest } from "redux-saga/effects";
 import actiontypes from "../redux/actionTypes/auth";
 import invokeApi from "../api/invokeApi";
 import apiConstant from "../api/constants";
-import { disconnectChat, setChatClient } from "../redux/actions/chat";
-import { createChatClient } from "../websocket/clientManager";
 import { navigateTo, setToken } from "../redux/actions/app";
+import { getChatClient } from "../websocket/clientManager";
 
 interface UserFormPayload {
   formData: object;
@@ -73,9 +72,6 @@ function* handleUserLogin(
       const localAccessToken = localStorage.getItem("accessToken");
       const localRefreshToken = localStorage.getItem("refreshToken");
       if (localAccessToken && localRefreshToken) {
-        const chatClient = createChatClient(accessToken);
-        yield put(setChatClient(chatClient)); // ✅ this persists client in redux
-        chatClient.connect(); // ✅ now safely connected
         yield put(setToken(localAccessToken));
       }
     }
@@ -86,11 +82,12 @@ function* handleUserLogin(
 function* handleUserLogout(): Generator<unknown, void, unknown> {
   try {
     const response = (yield invokeApi(apiConstant.USER_LOGOUT)) as ApiResponse;
-    if (response && response.data) {
+    if (response && response.success) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("userId");
-      yield put(disconnectChat()); // ✅ FIXED
+      const client = getChatClient();
+      client?.disconnect();
       yield put(setToken(null));
     }
     console.log(response);

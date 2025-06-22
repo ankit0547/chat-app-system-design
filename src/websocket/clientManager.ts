@@ -2,7 +2,7 @@ import { ChatClient } from "./client";
 
 // chatManager.ts
 let chatClientInstance: ChatClient | null = null;
-const SERVER_URL = "ws://localhost:7800";
+const SERVER_URL = "ws://localhost:7805";
 
 export function createChatClient(token: string): ChatClient {
   if (chatClientInstance) {
