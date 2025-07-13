@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const apiEndpoint = import.meta.env.VITE_APP_API_URL;
-        const endPoint = `${apiEndpoint}/user/refresh-token`;
+        const endPoint = `${apiEndpoint}/api/refresh-token`;
         const refreshToken = localStorage.getItem("refreshToken");
         const response = await axios.post(endPoint, { refreshToken });
         const newAccessToken = response.data.data.accessToken;

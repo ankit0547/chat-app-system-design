@@ -1,16 +1,24 @@
 const apiBaseURL = import.meta.env.VITE_APP_API_URL;
 const apiConstant = {
   USER_REGISTER: {
-    endpoint: `${apiBaseURL}/api/chatapp/register`,
+    endpoint: `${apiBaseURL}/api/register`,
     method: "POST",
   },
   USER_LOGIN: {
-    endpoint: `${apiBaseURL}/api/chatapp/login`,
+    endpoint: `${apiBaseURL}/api/login`,
     method: "POST",
   },
   USER_LOGOUT: {
-    endpoint: `${apiBaseURL}/api/chatapp/logout`,
+    endpoint: `${apiBaseURL}/api/logout`,
     method: "GET",
+  },
+  CREATE_DIRECT_CONVERSATION: {
+    endpoint: `${apiBaseURL}/api/conversation/direct`,
+    method: "POST",
+  },
+  CREATE_GROUP_CONVERSATION: {
+    endpoint: `${apiBaseURL}/api/conversation/group`,
+    method: "POST",
   },
 } as const;
 

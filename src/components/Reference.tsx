@@ -34,7 +34,7 @@ import {
   //   Flag,
 } from "lucide-react";
 
-function App() {
+function Reference() {
   const [activeTab, setActiveTab] = useState("chats");
   const [selectedChat, setSelectedChat] = useState(null);
   const [message, setMessage] = useState("");
@@ -1296,4 +1296,4 @@ function App() {
   );
 }
 
-export default App;
+export default Reference;

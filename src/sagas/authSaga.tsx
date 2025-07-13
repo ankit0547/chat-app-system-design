@@ -6,6 +6,7 @@ import invokeApi from "../api/invokeApi";
 import apiConstant from "../api/constants";
 import { navigateTo, setToken } from "../redux/actions/app";
 import { getChatClient } from "../websocket/clientManager";
+import { showSuccessToast } from "../redux/util/toastUtils";
 
 interface UserFormPayload {
   formData: object;
@@ -73,6 +74,7 @@ function* handleUserLogin(
       const localRefreshToken = localStorage.getItem("refreshToken");
       if (localAccessToken && localRefreshToken) {
         yield put(setToken(localAccessToken));
+        showSuccessToast("Login Success!!");
       }
     }
   } catch (e: unknown) {
