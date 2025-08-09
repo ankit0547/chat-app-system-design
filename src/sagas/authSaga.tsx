@@ -7,6 +7,7 @@ import apiConstant from "../api/constants";
 import { navigateTo, setToken } from "../redux/actions/app";
 import { getChatClient } from "../websocket/clientManager";
 import { showSuccessToast } from "../redux/util/toastUtils";
+import { ApiResponse } from "../types/types";
 
 interface UserFormPayload {
   formData: object;
@@ -21,12 +22,6 @@ interface UserLoginAction {
   type: string;
   payload: UserFormPayload;
   navigate: (path: string) => void;
-}
-
-interface ApiResponse {
-  success: boolean;
-  data?: unknown;
-  error?: [];
 }
 
 function* handleUserRegister(

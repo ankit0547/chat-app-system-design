@@ -1,19 +1,17 @@
 import { useSelector } from "react-redux";
-import { AppStateType, ChatType } from "../../../types/appTypes";
+
 import ChatList from "./ChatList";
 import { useState } from "react";
 
 import ChatHeader from "./ChatHeader";
 import { MessageSquare, Send } from "lucide-react";
+import { ChatState } from "../../../types/types";
 
 const Chats = () => {
   const [message, setMessage] = useState("");
-  const { allChats, selectedChat } = useSelector(
-    (state: AppStateType) => state.DashboardStates
+  const { selectedChat, conversations } = useSelector(
+    (state: ChatState) => state.chat
   );
-
-  // Mock data
-  const chats: ChatType[] = allChats;
 
   const messages = [
     {
@@ -182,14 +180,14 @@ const Chats = () => {
     <>
       {/* Chat List */}
       <div className="w-80 bg-white border-r border-gray-200">
-        <ChatList chats={chats} />
+        <ChatList chats={conversations} />
       </div>
       {/* Chat Area */}
       <div className="flex-1 flex flex-col">
         {selectedChat ? (
           <>
             {/* Chat Header */}
-            <ChatHeader chats={chats} />
+            <ChatHeader chats={conversations} />
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 bg-gray-50">

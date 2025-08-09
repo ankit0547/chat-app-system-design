@@ -3,10 +3,13 @@ import Sidebar from "../Sidebar/Sidebar";
 import { Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ReduxState } from "../../types/types";
-import { createChatClient } from "../../websocket/clientManager";
+// import { createChatClient } from "../../websocket/clientManager";
+import { useDispatch } from "react-redux";
+import { connectChat, getUserConversations } from "../../redux/actions/chat";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const token = useSelector((state: ReduxState) => state.app.token);
 
@@ -16,8 +19,11 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     if (token) {
-      const chatClient = createChatClient(token);
-      chatClient.connect();
+      // const chatClient = createChatClient(token);
+      // const chatClient = createChatClient(token);
+      // chatClient.connect();
+      dispatch(connectChat({ token }));
+      dispatch(getUserConversations());
     }
   }, []);
 

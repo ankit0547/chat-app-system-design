@@ -1,9 +1,9 @@
 import { Hash, Plus, Search, UserPlus, Users, X } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppStateType } from "../../../types/appTypes";
-import { selectChatAction } from "../../../redux/dashboardReducer";
 import "./chatList.css";
+import { ChatState } from "../../../types/types";
+import { setSelectedConversations } from "../../../redux/actions/chat";
 
 interface Chat {
   id: number;
@@ -19,9 +19,7 @@ interface ChatListProps {
 }
 
 const ChatList: React.FC<ChatListProps> = ({ chats }) => {
-  const { selectedChat } = useSelector(
-    (state: AppStateType) => state.DashboardStates
-  );
+  const { selectedChat } = useSelector((state: ChatState) => state.chat);
   const [showNewChatModal, setShowNewChatModal] = useState(false);
   const [newChatType, setNewChatType] = useState("direct"); // 'direct' or 'group'
   const [searchQuery, setSearchQuery] = useState("");
@@ -186,7 +184,7 @@ const ChatList: React.FC<ChatListProps> = ({ chats }) => {
     setShowNewChatModal(false);
     resetNewChatState();
   };
-
+  console.log("ChatList>>");
   return (
     <>
       <div className="p-4 border-b border-gray-200">
@@ -208,13 +206,15 @@ const ChatList: React.FC<ChatListProps> = ({ chats }) => {
         </div>
       </div>
       <div className="overflow-y-auto h-[calc(100vh-120px)]">
-        {chats.map((chat) => (
+        {chats?.map((chat) => (
           <div
             key={chat.id}
             className={`p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50 ${
               selectedChat === chat.id ? "bg-indigo-50" : ""
             }`}
-            onClick={() => dispatch(selectChatAction(chat.id))}
+            onClick={() =>
+              dispatch(setSelectedConversations(chat.id.toString()))
+            }
           >
             <div
               className={`chat-item ${
@@ -240,11 +240,11 @@ const ChatList: React.FC<ChatListProps> = ({ chats }) => {
               <div className="ml-3 flex-1">
                 <div className="flex justify-between items-center">
                   <h2 className="font-semibold text-gray-800">{chat.name}</h2>
-                  <span className="text-xs text-gray-500">{chat.time}</span>
+                  {/* <span className="text-xs text-gray-500">{chat.lastSeen}</span> */}
                 </div>
-                <p className="text-sm text-gray-600 truncate">
+                {/* <p className="text-sm text-gray-600 truncate">
                   {chat.lastMessage}
-                </p>
+                </p> */}
               </div>
               {chat.unread > 0 && (
                 <div className="ml-2 bg-indigo-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">

@@ -20,6 +20,10 @@ const apiConstant = {
     endpoint: `${apiBaseURL}/api/conversation/group`,
     method: "POST",
   },
+  GET_USER_CONVERSATIONS: {
+    endpoint: `${apiBaseURL}/api/conversations`,
+    method: "GET",
+  },
 } as const;
 
 export default apiConstant;
